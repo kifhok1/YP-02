@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FontFamily x:Key="Phosphor">/Assets/Font/Phosphor.ttf#Phosphor</FontFamily>
+    <FontFamily x:Key="PhosphorFill">/Assets/Font/Phosphor-Fill.ttf#Phosphor-Fill</FontFamily>
+    <FontFamily x:Key="PhosphorLight">/Assets/Font/Phosphor-Light.ttf#Phosphor-Light</FontFamily>
+    <FontFamily x:Key="PhosphorBold">/Assets/Font/Phosphor-Bold.ttf#Phosphor-Bold</FontFamily>
+    <FontFamily x:Key="PhosphorThin">/Assets/Font/Phosphor-Thin.ttf#Phosphor-Thin</FontFamily>
+</ResourceDictionary>

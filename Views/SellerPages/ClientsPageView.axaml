@@ -1,0 +1,143 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VKR.Views.SellerPages.ClientsPageView"
+             xmlns:viewModels="clr-namespace:VKR.ViewModels.SellerPages"
+             x:DataType="viewModels:ClientsPageViewModel">
+    <Design.DataContext>
+        <viewModels:ClientsPageViewModel/>
+    </Design.DataContext>
+    <Border Width="" Height="" Background="{DynamicResource navigationBarColor}" CornerRadius="30">
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="*">
+            <StackPanel Margin="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="30"
+                    Grid.Column="0"
+                    Grid.Row="0">
+            <TextBox Classes="dataTextBox"
+                     Watermark="Поиск"
+                     Height="45"
+                     Text="{Binding Search}"
+                     ZIndex="2"/>
+            <DataGrid ItemsSource="{Binding Clients}" 
+                        AutoGenerateColumns="False"
+                        CanUserSortColumns="False"
+                        CanUserResizeColumns="True"
+                        Height="450"
+                        Width="700"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="Black"
+                        BorderThickness="2 2 2 2"
+                        Background="White"
+                        BorderBrush="{DynamicResource primaryTextBoxColor}"
+                        ZIndex="2" 
+                        IsReadOnly="True"
+                        SelectedItem="{Binding SelectedClient}"
+                        DoubleTapped="InputElement_OnDoubleTapped"><DataGrid.Styles>
+                            <Style Selector="DataGridColumnHeader">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="BorderThickness" Value="2 2 2 2"></Setter>
+                                <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"></Setter>
+                            </Style>
+                            <Style Selector="DataGridCell">
+                                <Setter Property="BorderThickness" Value="1 1 1 1"></Setter>
+                                <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"></Setter>
+                            </Style>
+                        </DataGrid.Styles>
+                        
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Фио" Binding="{Binding Fio}" Width="*"/>
+                            <DataGridTextColumn Header="Номер телефона" Binding="{Binding PhoneNumber}" Width="*"/>
+                            <DataGridTextColumn Header="Общаяя сумма купленых товаров" Binding="{Binding AmountOfNumber}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+            </StackPanel>
+        <Border Grid.Column="0"
+               Grid.Row="0"
+               Background="#D0000000"
+               x:Name="Element"
+               CornerRadius="30"
+               IsVisible="{Binding IsVisiblePanel}">
+            <Border Width="600"
+                    Height="500"
+                    CornerRadius="20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="White">
+                <StackPanel HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                    <Button Classes="iconButton"
+                            FontFamily="{DynamicResource PhosphorBold}"
+                            Foreground="{DynamicResource exitButtonColor}"
+                            FontSize="40"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Content="&#xE4F6;"
+                            Margin="0 10 10 0"
+                            Click="Button_OnClick"/>
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                        <Label Content="ФИО"
+                               FontSize="26"
+                               FontWeight="DemiBold"
+                               Foreground="Black">
+                            </Label>
+                            <TextBox Classes="mainTextBox"
+                                     Text="{Binding Fio}"
+                                     Watermark="Иванов Иван Иванович"
+                                     x:Name="FIO"
+                                     MaxLength="200"
+                                     TextChanged="TextBox_OnTextChanged"
+                                     Width="400"
+                                     Margin="0 0 0 30">
+                            </TextBox>
+                            <Label Content="Номер телефона"
+                                   FontSize="26"
+                                   FontWeight="DemiBold"
+                                   Foreground="Black">
+                            </Label>
+                            <TextBox Classes="mainTextBox"
+                                     Text="{Binding PhoneNumber}"
+                                     Watermark="+7(999)999-99-99"
+                                     x:Name="PhoneNumber"
+                                     MaxLength="20"
+                                     PointerPressed="PhoneBox_PointerPressed"
+                                     Width="400"
+                                     Margin="0 0 0 30">
+                            </TextBox>
+                        <Label Content="Общая стоимость покупок"
+                               FontSize="26"
+                               FontWeight="DemiBold"
+                               Foreground="Black">
+                        </Label>
+                        <TextBox Classes="mainTextBox"
+                                 IsEnabled="False"
+                                 Watermark="35552.00"
+                                 x:Name="AmountOfNumber"
+                                 MaxLength="200"
+                                 TextChanged="AmountOfNumber_OnTextChanged"
+                                 Width="400"
+                                 Margin="0 0 0 60">
+                        </TextBox>
+                        <StackPanel Orientation="Horizontal" >
+                            <Button Content="Изменить данные клиента"
+                                    Classes="mainButton"
+                                    Command="{Binding UpdateClientCommand}"
+                                    Click="ButtonUpdate_OnClick"
+                                    HorizontalAlignment="Stretch"
+                                    Width="400"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Border>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,386 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             x:Class="VKR.Views.SellerPages.PurchaseAddPageView"
+             xmlns:viewModels="clr-namespace:VKR.ViewModels.SellerPages"
+             x:DataType="viewModels:PurchaseAddPageViewModel">
+    <Design.DataContext>
+        <viewModels:PurchaseAddPageViewModel/>
+    </Design.DataContext>
+    <Border Width="" Height="" Background="{DynamicResource navigationBarColor}" CornerRadius="30">
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="*">
+        <StackPanel Margin="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="10">
+                <StackPanel>
+                    <Label Content="Сортировка"
+                           FontSize="24"
+                           FontWeight="SemiBold"/>
+                    <ComboBox Classes="dataComboBox"
+                              Height="45"
+                              Width="250"
+                              PlaceholderText="Сортировка"
+                              ItemsSource="{Binding Sort}"
+                              SelectedItem="{Binding SortSelected}"
+                              DisplayMemberBinding="{Binding Name}"
+                              ZIndex="1"/>
+                </StackPanel>
+                <StackPanel Margin="0 -90 0 0"
+                            HorizontalAlignment="Right">
+                    <Label Content="Фильтрация"
+                           FontSize="24"
+                           FontWeight="SemiBold"/>
+                    <ComboBox Classes="dataComboBox"
+                              Height="45"
+                              Width="250"
+                              PlaceholderText="Фильтрация"
+                              ItemsSource="{Binding CategoryFilter}"
+                              SelectedItem="{Binding FilterSelected}"
+                              DisplayMemberBinding="{Binding Name}" ZIndex="1"/>
+                </StackPanel>
+                <TextBox Classes="dataTextBox"
+                         Watermark="Поиск"
+                         Height="45"
+                         Text="{Binding Search}"
+                         ZIndex="2"></TextBox>
+                    <DataGrid 
+                        ItemsSource="{Binding Products}" 
+                        SelectedItem="{Binding SelectedProduct}"
+                        AutoGenerateColumns="False"
+                        CanUserSortColumns="False"
+                        CanUserResizeColumns="False"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        Height="380"
+                        Width="700"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        BorderThickness="2 2 2 2"
+                        Foreground="Black"
+                        Background="White"
+                        BorderBrush="{DynamicResource primaryTextBoxColor}"
+                        ZIndex="2"
+                        SelectionMode="Extended"
+                        IsReadOnly="True">
+                        <DataGrid.Styles>
+                            <Style Selector="DataGridColumnHeader">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="BorderThickness" Value="2 2 2 2"></Setter>
+                                <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"></Setter>
+                            </Style>
+                            <Style Selector="DataGridCell">
+                                <Setter Property="BorderThickness" Value="1 1 1 1"></Setter>
+                                <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"></Setter>
+                            </Style>
+                            <Style Selector="DataGridCell:selected, DataGridCell:pointerover:selected">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+                            </Style>
+                        </DataGrid.Styles>
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Категория" Binding="{Binding CategoryView}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Cost}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Скидка" Binding="{Binding Discount}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Количество на складе" Binding="{Binding CountInStock}" Width="*"></DataGridTextColumn>
+                            <DataGridTemplateColumn Header="Товары в корзине" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Spacing="10">
+                                            <Button Classes="iconButtonAdd"
+                                                    HorizontalAlignment="Center"
+                                                    Command="{ Binding AddToTrashCommand }"
+                                                    IsEnabled="{ Binding IsEnabledAdd }"
+                                                    Content="&#xE3D4;"/>
+                                            <Label Content="{ Binding Trash }"
+                                                   VerticalAlignment="Center"/>
+                                            <Button Classes="iconButtonSub" 
+                                                    HorizontalAlignment="Center"
+                                                    Command="{Binding RemoveFromTrashCommand}"
+                                                    IsEnabled="{Binding IsEnabledRemove}"
+                                                    Content="&#xE32A;"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Classes="mainButton" 
+                            HorizontalAlignment="Stretch" 
+                            Content="Корзина"
+                            Command="{Binding GoToTrashCommand}"/>
+            </StackPanel>
+            <Border Grid.Column="0"
+                    Grid.Row="0"
+                    Background="#D0000000"
+                    IsVisible="{Binding IsVisibleAddOrder}"
+                    x:Name="Element"
+                    CornerRadius="30">
+                <Border Width="750"
+                        Height="620"
+                        CornerRadius="20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="White">
+                    <StackPanel HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                        <Button Classes="iconButton"
+                                FontFamily="{DynamicResource PhosphorBold}"
+                                Foreground="{DynamicResource exitButtonColor}"
+                                FontSize="40"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Content="&#xE4F6;"
+                                Margin="0 10 10 0"
+                                Command="{Binding AddOrderHideCommand}"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="50" Margin="5 10 0 10">
+                            <StackPanel Margin="20 0 0 0">
+                                <Label Content="Клиент"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"/>
+                                <ComboBox
+                                    Classes="dataComboBox"
+                                    Width="200"
+                                    Height="50"
+                                    CornerRadius="10"
+                                    ItemsSource="{Binding Clients}"
+                                    SelectedItem="{Binding SelectedClients}"
+                                    x:Name="ComboBoxClients"
+                                    DisplayMemberBinding="{Binding Name}"
+                                    HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="Дата создания заказа"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"/>
+                                <CalendarDatePicker
+                                    Height="50"
+                                    Width="200"
+                                    Background="Transparent"
+                                    SelectedDate="{Binding DateCreated}"
+                                    BorderBrush="{DynamicResource primaryTextBoxColor}"
+                                    BorderThickness="3"
+                                    FontWeight="Normal"
+                                    Foreground="{DynamicResource primaryTextBoxColor}"
+                                    CornerRadius="5"
+                                    FontSize="18"
+                                    HorizontalAlignment="Center"
+                                    x:Name="CalendarDatePicker"
+                                    IsHitTestVisible="False"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label Content="Дата доставки заказа"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"/>
+                                <CalendarDatePicker
+                                    Height="50"
+                                    Width="200"
+                                    Background="Transparent"
+                                    SelectedDate="{Binding DeliveryDate}"
+                                    BorderBrush="{DynamicResource primaryTextBoxColor}"
+                                    DisplayDateStart="{Binding DeliveryDateStart}"
+                                    DisplayDateEnd="{Binding DeliveryDateEnd}"
+                                    BorderThickness="3"
+                                    FontWeight="Normal"
+                                    KeyDown="InputElement_OnKeyDown"
+                                    TextInput="InputElement_OnTextInput"
+                                    Foreground="{DynamicResource primaryTextBoxColor}"
+                                    CornerRadius="5"
+                                    FontSize="18"
+                                    x:Name="CalendarDeliveryDatePicker"
+                                    HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <DataGrid ItemsSource="{Binding ProductsToTrash}" 
+                            AutoGenerateColumns="False"
+                            CanUserSortColumns="False"
+                            CanUserResizeColumns="True"
+                            BorderThickness="2 2 2 2"
+                            Height="380"
+                            Width="700"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="Black"
+                            Background="White"
+                            BorderBrush="{DynamicResource primaryTextBoxColor}"
+                            ZIndex="2" 
+                            IsReadOnly="True"
+                            ><DataGrid.Styles>
+                                <Style Selector="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="BorderThickness" Value="2 1 2 2"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"/>
+                                </Style>
+                                <Style Selector="DataGridCell">
+                                    <Setter Property="BorderThickness" Value="1 1 1 1"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"/>
+                                </Style>
+                            </DataGrid.Styles>
+                            
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Товар" Binding="{Binding Name}" Width="*"/>
+                                <DataGridTextColumn Header="Цена товара" Binding="{Binding PriceToDiscount}" Width="*"/>
+                                <DataGridTemplateColumn Header="Товары в корзине" Width="*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Spacing="10">
+                                                <Button Classes="iconButtonAdd"
+                                                        HorizontalAlignment="Center"
+                                                        Command="{Binding AddToTrashCommand}"
+                                                        IsEnabled="{Binding IsEnabledAdd}"
+                                                        Content="&#xE3D4;"/>
+                                                <Label Content="{Binding Trash }"
+                                                       VerticalAlignment="Center"/>
+                                                <Button Classes="iconButtonSub" 
+                                                        HorizontalAlignment="Center"
+                                                        Command="{Binding RemoveFromTrashCommand}"
+                                                        IsEnabled="{Binding IsEnabledRemove}"
+                                                        Content="&#xE32A;"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button
+                            Margin="0 20 0 0"
+                            Content="Оформить заказ"
+                            Classes="mainButton"
+                            Height="50"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Command="{Binding OrderConfirmationCommand}"
+                            Width="700"/>
+                    </StackPanel>
+                </Border>    
+            </Border>
+            <Border Grid.Column="0"
+                    Grid.Row="0"
+                    Background="#00000000"
+                    IsVisible="{Binding IsVisibleOrderConfirmation}"
+                    x:Name="ElementOrderConfirmation"
+                    CornerRadius="30">
+                <Border Width="750"
+                        Height="620"
+                        CornerRadius="20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="White">
+                    <StackPanel HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch">
+                        <Button Classes="iconButton"
+                                FontFamily="{DynamicResource PhosphorBold}"
+                                Foreground="{DynamicResource exitButtonColor}"
+                                FontSize="40"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Content="&#xE4F6;"
+                                Command="{Binding OrderConfirmationHideCommand}"
+                                Margin="0 10 10 0"/>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Spacing="10" Margin="25 10 0 25">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="5">
+                                <Label FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Content="{Binding OrderNew.StringCreateDate}"
+                                       HorizontalAlignment="Left"/>
+                                <Label FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Content="{Binding OrderNew.StringDeliveryDate}"
+                                       HorizontalAlignment="Right"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="5">
+                                <Label FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Content="{Binding OrderNew.StringClient}"
+                                       HorizontalAlignment="Left"/>
+                                <Label FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Content="{Binding OrderNew.StringCode}"
+                                       HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </StackPanel>
+                            <DataGrid ItemsSource="{Binding OrderNew.Products}" 
+                                      AutoGenerateColumns="False"
+                                      CanUserSortColumns="False"
+                                      CanUserResizeColumns="True"
+                                      BorderThickness="2 2 2 2"
+                                      Height="270"
+                                      Width="700"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Foreground="Black"
+                                      Background="White"
+                                      BorderBrush="{DynamicResource primaryTextBoxColor}"
+                                      ZIndex="2" 
+                                      IsReadOnly="True"><DataGrid.Styles>
+                                <Style Selector="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="BorderThickness" Value="2 1 2 2"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"/>
+                                </Style>
+                                <Style Selector="DataGridCell">
+                                    <Setter Property="BorderThickness" Value="1 1 1 1"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"/>
+                                </Style>
+                            </DataGrid.Styles>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Товар" Binding="{Binding Name}" Width="*"/>
+                                <DataGridTextColumn Header="Цена товара" Binding="{Binding PriceToDiscount}" Width="*"/>
+                                <DataGridTextColumn Header="Количество" Binding="{Binding Trash}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Spacing="20" Orientation="Horizontal" HorizontalAlignment="Center" Margin="25 20 25 0">
+                            <Label FontSize="16"
+                                FontWeight="SemiBold"
+                                Content="{Binding OrderNew.StringTotalPrice}"
+                                HorizontalAlignment="Left"/>
+                            <Label FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Content="{Binding OrderNew.StringTotalDiscount}"
+                                   HorizontalAlignment="Right"/>
+                        </StackPanel>
+                        <Label FontSize="16"
+                               FontWeight="SemiBold"
+                               Content="{Binding OrderNew.StringTotalPriceWithDiscount}"
+                               HorizontalAlignment="Center"
+                               Margin="25 0 25 0"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50">
+                            <Button
+                                Margin="0 20 0 0"
+                                Content="Печать чека"
+                                Classes="mainButton"
+                                Height="50"
+                                Command="{Binding CreateReportCommand}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
+                            <Button Margin="0 20 0 0"
+                                    Content="Подтверждение заказа"
+                                    Classes="mainButton"
+                                    Height="50"
+                                    IsEnabled="{Binding IsEnabledOrderConfirmation}"
+                                    Command="{Binding AddingNewOrderCommand}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                        </StackPanel>    
+                        </StackPanel>
+                </Border>    
+            </Border>
+            </Grid>
+        </Border>
+</UserControl>

@@ -1,0 +1,150 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <Button Height="" Width=""
+                    Classes="navigationBarButton">
+                <StackPanel Orientation="Horizontal">
+                    <Label Classes="icon"></Label>
+                    <Label Classes="textNavigationButton">Settings</Label>
+                </StackPanel>
+            </Button>
+        </Border>
+    </Design.PreviewWith>
+    
+    
+    <Style Selector="Button.mainButton">
+        <Setter Property="Background" Value="White"> </Setter>
+        <Setter Property="BorderBrush" Value="Black"> </Setter>
+        <Setter Property="BorderThickness" Value="3"> </Setter>
+        <Setter Property="Foreground" Value="Black"> </Setter>
+        <Setter Property="CornerRadius" Value="10"> </Setter>
+        <Setter Property="FontSize" Value="25"> </Setter>
+        <Setter Property="FontWeight" Value="DemiBold"> </Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Center"> </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"> </Setter>
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="BorderBrush" Value="Black"></Setter>
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.3" Easing="QuarticEaseOut"/>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.3" Easing="QuarticEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+    </Style>
+    
+    <Style Selector="Button.exitButton">
+        <Setter Property="Background" Value="White"> </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource exitButtonColor}"> </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource exitButtonColor}"></Setter>
+        <Setter Property="BorderThickness" Value="3"> </Setter>
+        <Setter Property="CornerRadius" Value="10"> </Setter>
+        <Setter Property="FontSize" Value="25"> </Setter>
+        <Setter Property="FontWeight" Value="DemiBold"> </Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Center"> </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"> </Setter>
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource exitButtonColor}"> </Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="BorderBrush" Value="{DynamicResource exitButtonColor}"></Setter>
+        </Style>
+        <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="0:0:0.3" Easing="QuarticEaseOut"/>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.3" Easing="QuarticEaseOut"/>
+                </Transitions>
+            </Setter>
+        </Style>
+    </Style>
+    
+    <Style Selector="Button.iconButton">
+        <Setter Property="FontFamily" Value="{DynamicResource PhosphorFill}"></Setter>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        
+        <Style Selector="^:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        
+        <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Style>
+    
+    <Style Selector="Button.navigationBarButton">
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"></Setter>
+        </Style>
+        
+        <Style Selector="^:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"></Setter>
+        </Style>
+    </Style>
+    <Style Selector="Button.iconButtonAdd">
+        <Setter Property="FontFamily" Value="{DynamicResource Phosphor}"></Setter>
+        <Setter Property="FontSize" Value="30"></Setter>
+        <Setter Property="Padding" Value="0"></Setter>
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource addColor}"></Setter>
+        
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource addColor}"></Setter>
+        </Style>
+        
+        <Style Selector="^:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource addColor}"></Setter>
+        </Style>
+        
+        <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Style>
+    <Style Selector="Button.iconButtonSub">
+        <Setter Property="FontFamily" Value="{DynamicResource Phosphor}"></Setter>
+        <Setter Property="FontSize" Value="30"></Setter>
+        <Setter Property="Padding" Value="0"></Setter>
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource errorColor}"></Setter>
+        
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource errorColor}"></Setter>
+        </Style>
+        
+        <Style Selector="^:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource errorColor}"></Setter>
+        </Style>
+        
+        <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Style>
+    
+    <Style Selector="Button.navigationBarButton">
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"></Setter>
+        </Style>
+        
+        <Style Selector="^:focus /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"></Setter>
+        </Style>
+    </Style>
+</Styles>

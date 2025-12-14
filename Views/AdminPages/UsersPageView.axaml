@@ -1,0 +1,228 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="750" d:DesignHeight="600"
+             x:Class="VKR.Views.AdminPages.UsersPageView"
+             xmlns:viewModels="clr-namespace:VKR.ViewModels.AdminPages"
+             x:DataType="viewModels:UsersPageViewModel">
+    <Design.DataContext>
+        <viewModels:UsersPageViewModel/>
+    </Design.DataContext>
+    <Grid ColumnDefinitions="*" RowDefinitions="*">
+    <Border Width="" Height="" Background="{DynamicResource navigationBarColor}" CornerRadius="30">
+            <StackPanel Margin="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="30">
+                <TextBox Classes="dataTextBox"
+                         Watermark="Поиск"
+                         Height="45"
+                         Text="{Binding Search}"
+                         ZIndex="2"></TextBox>
+                <DataGrid ItemsSource="{Binding Workers}" 
+                        AutoGenerateColumns="False"
+                        CanUserSortColumns="False"
+                        CanUserResizeColumns="True"
+                        Height="450"
+                        Width="700"
+                        DoubleTapped="InputElement_OnDoubleTapped"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="Black"
+                        Background="White"
+                        BorderThickness="2 2 2 2"
+                        IsReadOnly="True"
+                        SelectedItem="{Binding SelectedWorker}"
+                        BorderBrush="{DynamicResource primaryTextBoxColor}"
+                        ZIndex="2"><DataGrid.Styles>
+                            <Style Selector="DataGridColumnHeader">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="BorderThickness" Value="2 2 2 2"></Setter>
+                                <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"></Setter>
+                            </Style>
+                            <Style Selector="DataGridCell">
+                                <Setter Property="BorderThickness" Value="1 1 1 1"></Setter>
+                                <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"></Setter>
+                            </Style>
+                        </DataGrid.Styles>
+                        
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding Fio}" Width="*"/>
+                            <DataGridTextColumn Header="Роль" Binding="{Binding RuleView}" Width="*"/>
+                            <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="*"/>
+                            <DataGridTextColumn Header="Номер телефона" Binding="{Binding PhoneNumber}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                
+            </StackPanel>
+    </Border>
+        <Border Grid.Column="0"
+               Grid.Row="0"
+               Background="#D0000000"
+               IsVisible="False"
+               x:Name="Element"
+               CornerRadius="30">
+            <Border Width="750"
+                    Height="620"
+                    CornerRadius="20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="White">
+                <StackPanel HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                    <Button Classes="iconButton"
+                            FontFamily="{DynamicResource PhosphorBold}"
+                            Foreground="{DynamicResource exitButtonColor}"
+                            FontSize="40"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Content="&#xE4F6;"
+                            Margin="0 10 10 0"
+                            Click="Button_OnClick"/>
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                        <StackPanel >
+                            <Grid RowDefinitions="* * * *" 
+                                  ColumnDefinitions="* * *">
+                                <Label Grid.Row="0" Grid.Column="0"
+                           Content="Телефон"
+                           FontSize="20"
+                           FontWeight="DemiBold"
+                           Foreground="Black"/>
+                    <TextBox Grid.Row="1" Grid.Column="0" 
+                             Classes="mainTextBox"
+                             Watermark="+7(999)999-99-99"
+                             Width="250"
+                             Height="50"
+                             MaxLength="20"
+                             Margin="0 0 0 0"
+                             FontSize="20"
+                             x:Name="PhoneNumber"
+                             PointerPressed="PhoneBox_PointerPressed"
+                             Text="{Binding PhoneNumber}"/>
+                    <Label Grid.Row="2" Grid.Column="0"
+                           Content="ФИО"
+                           FontWeight="DemiBold"
+                           Margin="0 15 0 0"
+                           FontSize="20"
+                           Foreground="Black"/>
+                    <TextBox Grid.Row="3" Grid.Column="0"
+                             Classes="mainTextBox"
+                             Watermark="Иванов И. И."
+                             Height="50"
+                             MaxLength="100"
+                             Width="250"
+                             FontSize="20"
+                             x:Name="FIO"
+                             TextChanged="FIO_OnTextChanged"
+                             Text="{Binding Fio}"/>
+                    <Label Grid.Row="0" Grid.Column="1"
+                           Content="Логин"
+                           FontWeight="DemiBold"
+                           Margin="10 0 0 0"
+                           FontSize="20"
+                           Foreground="Black"/>
+                    <TextBox Grid.Row="1" Grid.Column="1"
+                             Classes="mainTextBox"
+                             Width="250"
+                             Watermark="Egorov2353"
+                             Margin="10 0 0 0"
+                             FontSize="20"
+                             MaxLength="30"
+                             x:Name="Login"
+                             TextChanged="Login_OnTextChanged"
+                             Text="{Binding Login}"/>
+                    <Label Grid.Row="2" Grid.Column="1"
+                           Content="Пароль"
+                           FontWeight="DemiBold"
+                           Margin="10 15 0 0"
+                           FontSize="20"
+                           Foreground="Black"/>
+                    <TextBox Grid.Row="3" Grid.Column="1"
+                             Classes="mainTextBox"
+                             Watermark="qwerty123"
+                             Width="250"
+                             Margin="10 0 0 0"
+                             FontSize="20"
+                             x:Name="Password"
+                             MaxLength="20"
+                             TextChanged="Password_OnTextChanged"
+                             Text="{Binding Password}"/>
+                    <Label Grid.Row="0" Grid.Column="2"
+                           Content="Роль"
+                           FontWeight="DemiBold"
+                           Margin="10 0 0 0"
+                           FontSize="20"
+                           Foreground="Black"/>
+                    <ComboBox Grid.Row="1" Grid.Column="2" 
+                             Classes="dataComboBox"
+                             Width="200"
+                             Height="50"
+                             CornerRadius="10"
+                             Margin="10 0 0 0"
+                             FontSize="20"
+                             x:Name="Role"
+                             ItemsSource="{Binding RoleUser}"
+                             SelectedItem="{Binding RoleUserSelected}"
+                             DisplayMemberBinding="{Binding Name}"
+                             PlaceholderForeground="{DynamicResource primaryTextBoxColor}"></ComboBox>
+                    <Button Grid.Row="3" 
+                            Grid.Column="2"
+                            Height="50"
+                            Width="200"
+                            Margin="10 0 0 0"
+                            Classes="mainButton"
+                            Command="{Binding AddImageCommand}"
+                            FontSize="23"
+                            Content="Изменить фото"></Button>            
+                            </Grid>
+                            <Rectangle Grid.Column="0"
+                                       Stroke="{DynamicResource primaryTextBoxColor}"
+                                       StrokeThickness="4"
+                                       Margin="0 15 0 0"
+                                       StrokeDashArray="5,1" 
+                                       RadiusX="10"
+                                       RadiusY="10"
+                                       Height="300"
+                                       Width="450"
+                                       x:Name="NonImageBorder"
+                                       IsVisible="{Binding IsVisibleBorder}"/>
+                            <Border CornerRadius="10"
+                                    Margin="0 15 0 0"
+                                    IsVisible="{Binding IsVisibleImage}"
+                                    x:Name="ImageBorder"
+                                    Height="300"
+                                    Width="450"
+                                    ClipToBounds="True">
+                                <Image Source="{Binding ImageUser}"
+                                       Stretch="UniformToFill"
+                                       x:Name="ImageUser"/>
+                            </Border>
+                        </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Изменить данные работника"
+                                Margin="0 15 0 0"
+                                VerticalAlignment="Bottom"
+                                Classes="mainButton"
+                                Command="{Binding UpdateUserCommand}"
+                                Click="ButtonUpdate_OnClick"
+                                HorizontalAlignment="Stretch"
+                                Width="400"/>
+                        <Button Content="Удалить"
+                            Margin="15 15 0 0"
+                            VerticalAlignment="Bottom"
+                            Classes="mainButton"
+                            Command="{Binding DeleteUserCommand}"
+                            Click="ButtonDelete_OnClick"
+                            HorizontalAlignment="Stretch"
+                            Width="200"/>
+                    </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Border>
+    </Grid>    
+</UserControl>

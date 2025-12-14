@@ -1,0 +1,257 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="650"
+             x:Class="VKR.Views.ConsultantPages.ProductsPageView"
+             xmlns:viewModels="clr-namespace:VKR.ViewModels.ConsultantPages"
+             x:DataType="viewModels:ProductsPageViewModel">
+    <Design.DataContext>
+        <viewModels:ProductsPageViewModel/>
+    </Design.DataContext>
+    <Grid ColumnDefinitions="*" RowDefinitions="*">
+    <Border Width="" Height="" Background="{DynamicResource navigationBarColor}" CornerRadius="30">
+        <StackPanel Margin="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="20">
+            <StackPanel>
+                <Label Content="Сортировка"
+                       FontSize="24"
+                       FontWeight="SemiBold"/>
+                <ComboBox Classes="dataComboBox"
+                          Height="45"
+                          Width="250"
+                          PlaceholderText="Сортировка"
+                          ItemsSource="{Binding Sort}"
+                          SelectedItem="{Binding SortSelected}"
+                          DisplayMemberBinding="{Binding Name}"
+                          ZIndex="1"/>
+            </StackPanel>
+            <StackPanel Margin="0 -104 0 0"
+                        HorizontalAlignment="Right">
+                <Label Content="Фильтрация"
+                       FontSize="24"
+                       FontWeight="SemiBold"/>
+                <ComboBox Classes="dataComboBox"
+                          Height="45"
+                          Width="250"
+                          PlaceholderText="Фильтрация"
+                          ItemsSource="{Binding CategoryFilter}"
+                          SelectedItem="{Binding FilterSelected}"
+                          DisplayMemberBinding="{Binding Name}" ZIndex="1"/>
+            </StackPanel>
+                    
+
+                <TextBox Classes="dataTextBox"
+                         Watermark="Поиск"
+                         Height="45"
+                         Text="{Binding Search}"
+                         ZIndex="2"/>
+                    <DataGrid 
+                        ItemsSource="{Binding Products}" 
+                        SelectedItem="{Binding SelectedProduct}"
+                        AutoGenerateColumns="False"
+                        CanUserSortColumns="False"
+                        CanUserResizeColumns="False"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        Height="450"
+                        Width="700"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="Black"
+                        Background="White"
+                        BorderThickness="2 2 2 2"
+                        BorderBrush="{DynamicResource primaryTextBoxColor}"
+                        ZIndex="2"
+                        SelectionMode="Extended"
+                        IsReadOnly="True"
+                        DoubleTapped="InputElement_OnDoubleTapped">
+                        <DataGrid.Styles>
+                            <Style Selector="DataGridColumnHeader">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="BorderThickness" Value="2 2 2 2"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"/>
+                            </Style>
+                            <Style Selector="DataGridCell">
+                                <Setter Property="BorderThickness" Value="1 1 1 1"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"/>
+                            </Style>
+                            <Style Selector="DataGridCell:selected, DataGridCell:pointerover:selected">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="BorderBrush" Value="Transparent"/>
+                            </Style>
+                        </DataGrid.Styles>
+                        
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
+                            <DataGridTextColumn Header="Категория" Binding="{Binding CategoryView}" Width="*"/>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Cost}" Width="*"/>
+                            <DataGridTextColumn Header="Скидка" Binding="{Binding Discount}" Width="*"/>
+                            <DataGridTextColumn Header="Количество на складе" Binding="{Binding CountInStock}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+            </StackPanel>
+    </Border>
+        <Border Grid.Column="0"
+               Grid.Row="0"
+               Background="#D0000000"
+               IsVisible="False"
+               x:Name="Element"
+               CornerRadius="30">
+            <Border Width="750"
+                    Height="620"
+                    CornerRadius="20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="White">
+                <StackPanel HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                    <Button Classes="iconButton"
+                            FontFamily="{DynamicResource PhosphorBold}"
+                            Foreground="{DynamicResource exitButtonColor}"
+                            FontSize="40"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Content="&#xE4F6;"
+                            Margin="0 10 10 0"
+                            Click="Button_OnClick"/>
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                        <StackPanel >
+                            <Grid RowDefinitions="* * * *" 
+                                  ColumnDefinitions="* * *">
+                                <Label Grid.Row="0" Grid.Column="0"
+                           Content="Название"
+                           FontSize="20"
+                           FontWeight="DemiBold"
+                           Foreground="Black"/>
+                    <TextBox Grid.Row="1" Grid.Column="0" 
+                             Classes="mainTextBox"
+                             Watermark="Nikon Z7 III"
+                             Width="250"
+                             Height="50"
+                             MaxLength="200"
+                             Margin="0 0 0 0"
+                             FontSize="20"
+                             x:Name="Name"
+                             TextChanged="Name_OnTextChanged"
+                             Text="{Binding Name}"/>
+                    <Label Grid.Row="2" Grid.Column="0"
+                           Content="Количество на складе"
+                           FontWeight="DemiBold"
+                           Margin="0 15 0 0"
+                           FontSize="20"
+                           Foreground="Black"/>
+                    <TextBox Grid.Row="3" Grid.Column="0"
+                             Classes="mainTextBox"
+                             Watermark=""
+                             Height="50"
+                             MaxLength="3"
+                             Width="250"
+                             FontSize="20"
+                             x:Name="CountInStoke"
+                             TextChanged="CountInStoke_OnTextChanged"
+                             Text="{Binding CountInStoke}"/>
+                    <Label Grid.Row="0" Grid.Column="1"
+                           Content="Цена"
+                           FontWeight="DemiBold"
+                           Margin="10 0 0 0"
+                           FontSize="20"
+                           Foreground="Black"/>
+                    <TextBox Grid.Row="1" Grid.Column="1"
+                             Classes="mainTextBox"
+                             Width="250"
+                             Watermark=""
+                             Margin="10 0 0 0"
+                             FontSize="20"
+                             MaxLength="8"
+                             x:Name="Price"
+                             TextChanged="Price_OnTextChanged"
+                             Text="{Binding Price}"/>
+                    <Label Grid.Row="2" Grid.Column="1"
+                           Content="Скидка"
+                           FontWeight="DemiBold"
+                           Margin="10 15 0 0"
+                           FontSize="20"
+                           Foreground="Black"/>
+                    <TextBox Grid.Row="3" Grid.Column="1"
+                             Classes="mainTextBox"
+                             Watermark=""
+                             Width="250"
+                             Margin="10 0 0 0"
+                             FontSize="20"
+                             x:Name="Discount"
+                             MaxLength="2"
+                             TextChanged="Discount_OnTextChanged"
+                             Text="{Binding Discount}"/>
+                    <Label Grid.Row="0" Grid.Column="2"
+                           Content="Категория"
+                           FontWeight="DemiBold"
+                           Margin="10 0 0 0"
+                           FontSize="20"
+                           Foreground="Black"/>
+                    <ComboBox Grid.Row="1" Grid.Column="2" 
+                             Classes="dataComboBox"
+                             Width="200"
+                             Height="50"
+                             CornerRadius="10"
+                             Margin="10 0 0 0"
+                             FontSize="20"
+                             x:Name="Category"
+                             ItemsSource="{Binding ListCategory}"
+                             SelectedItem="{Binding CategorySelected}"
+                             DisplayMemberBinding="{Binding Name}"
+                             PlaceholderForeground="{DynamicResource primaryTextBoxColor}"></ComboBox>
+                    <Button Grid.Row="3" 
+                            Grid.Column="2"
+                            Height="50"
+                            Width="200"
+                            Margin="10 0 0 0"
+                            Classes="mainButton"
+                            Command="{Binding AddImageCommand}"
+                            FontSize="23"
+                            Content="Изменить фото"></Button>            
+                            </Grid>
+                            <Rectangle Grid.Column="0"
+                                       Stroke="{DynamicResource primaryTextBoxColor}"
+                                       StrokeThickness="4"
+                                       Margin="0 15 0 0"
+                                       StrokeDashArray="5,1" 
+                                       RadiusX="10"
+                                       RadiusY="10"
+                                       Height="300"
+                                       Width="450"
+                                       x:Name="NonImageBorder"
+                                       IsVisible="{Binding BorderVisible}"/>
+                            <Border CornerRadius="10"
+                                    Margin="0 15 0 0"
+                                    IsVisible="{Binding ImageVisible}"
+                                    x:Name="ImageBorder"
+                                    Height="300"
+                                    Width="450"
+                                    ClipToBounds="True">
+                                <Image Source="{Binding Image}"
+                                       Stretch="UniformToFill"
+                                       x:Name="ImageUser"/>
+                            </Border>
+                        </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Изменить данные товара"
+                                Margin="0 15 0 0"
+                                VerticalAlignment="Bottom"
+                                Classes="mainButton"
+                                Command="{Binding UpdateProductCommand}"
+                                Click="ButtonUpdate_OnClick"
+                                HorizontalAlignment="Stretch"
+                                Width="400"/>
+                    </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Border>
+    </Grid>    
+</UserControl>

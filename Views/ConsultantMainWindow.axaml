@@ -1,0 +1,103 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:VKR.ViewModels"
+        xmlns:views="clr-namespace:VKR.Views"
+        mc:Ignorable="d" 
+        Width="1140" Height="720"
+        x:Class="VKR.Views.ConsultantMainWindow"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        SystemDecorations="None"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        WindowStartupLocation="CenterScreen"
+        x:DataType="viewModels:ConsultantMainViewModel"
+        Title="Рабочее место консультанта">
+        <Design.DataContext>
+            <views:ConsultantMainWindow/>
+        </Design.DataContext>
+        <Border CornerRadius="30" Background="White">
+                <Panel>
+                    <Grid RowDefinitions="30 *">
+                        <Panel Grid.Row="0" Background="Transparent" 
+                               PointerMoved="InputElement_OnPointerMoved" 
+                               PointerPressed="InputElement_OnPointerPressed" 
+                               PointerReleased="InputElement_OnPointerReleased"/>
+                        <Panel Grid.Row="1" Background="Transparent"/>
+                    </Grid>
+                    <Grid ColumnDefinitions="300 *">
+                        <Border Grid.Column="0" 
+                            Background="{DynamicResource navigationBarColor}" 
+                            Margin="20"
+                            CornerRadius="30">
+                            <Grid RowDefinitions="Auto * Auto">
+                                <StackPanel Grid.Row="0" Spacing="15">
+                                    <Border Background="Gray"
+                                            Width="150"
+                                            Height="150"
+                                            ClipToBounds="True"
+                                            CornerRadius="200"
+                                            Margin="0 20 0 0">
+                                        <Image Stretch="UniformToFill"
+                                               Source="{Binding ImageUser}"/>
+                                    </Border>
+                                    <TextBlock FontSize="18"
+                                        HorizontalAlignment="Center" 
+                                        Foreground="Black"
+                                        TextAlignment="Center"
+                                        TextWrapping="Wrap"
+                                        Text="{Binding Fio}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Margin="0 30 0 0">
+                                    <Button Classes="navigationBarButton"
+                                            x:Name="Product"
+                                            Click="Product_OnClick"
+                                    Command="{Binding GoToProductsPageCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Classes="icon" 
+                                                   VerticalAlignment="Center"
+                                                   Content="{Binding ProductNavButtonIcon}"/>
+                                            <Label Classes="textNavigationButton" 
+                                                   VerticalAlignment="Center" 
+                                                   Content="{Binding ProductNavButton}"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Classes="navigationBarButton"
+                                            x:Name="ProductAdd"
+                                            Click="ProductAdd_OnClick"
+                                    Command="{Binding GoToProductAddPageCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Classes="icon" 
+                                                   VerticalAlignment="Center"
+                                                   Content="{Binding ProductAddNavButtonIcon}"/>
+                                            <Label Classes="textNavigationButton" 
+                                                   VerticalAlignment="Center" 
+                                                   Content="{Binding ProductAddNavButton}"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                                <Button Grid.Row="2"
+                                        Classes="navigationBarButton"
+                                        Margin="0 0 0 20"
+                                        Click="ButtonExit_OnClick">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Classes="icon" 
+                                               VerticalAlignment="Center"
+                                               Content="&#xE42A;"/>
+                                        <Label Classes="textNavigationButton" 
+                                               VerticalAlignment="Center" 
+                                               Content="Выйти"/>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Column="1" Margin="0 20 20 20"
+                                CornerRadius="30">
+                            <ContentControl Content="{Binding CurrentPage}"/>
+                        </Border>
+                    </Grid>
+                </Panel>
+        </Border>
+</Window>

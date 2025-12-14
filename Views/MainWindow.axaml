@@ -1,0 +1,117 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:VKR.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Width="1140" Height="720"
+        x:Class="VKR.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        SystemDecorations="None"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        WindowStartupLocation="CenterScreen"
+        IsVisible="{Binding WindowVisible}"
+        Title="Авторизация">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Border CornerRadius="30" Background="White">
+        <Panel><Grid RowDefinitions="30 *">
+                <Panel Grid.Row="0" Background="Transparent" PointerMoved="InputElement_OnPointerMoved" PointerPressed="InputElement_OnPointerPressed" PointerReleased="InputElement_OnPointerReleased"></Panel>
+                <Panel Grid.Row="1" Background="Transparent"></Panel>
+            </Grid>
+            <Grid ColumnDefinitions="* 400" Margin="20">
+                    <Border Grid.Column="0" >
+                        <Border.Clip >
+                            <PathGeometry>
+                                M0 25C0 11.1929 11.1929 0 25 0H570.822C586.157 0 597.878 13.6792 595.527 28.8328L497.784 658.833C495.894 671.014 485.407 680 473.08 680H25C11.1929 680 0 668.807 0 655V25Z
+                            </PathGeometry>
+                        </Border.Clip>
+                        <Image Source="/Assets/Image/photo1.jpg" Stretch="UniformToFill" Margin="0 0 50 0"/>
+                    </Border>
+                
+                <StackPanel VerticalAlignment="Stretch"
+                            Spacing="30"
+                            Grid.Column="1">
+                    <Grid RowDefinitions="Auto 470 Auto">
+                        <Button Grid.Row="0"
+                                Content="{Binding SettingsIcon}"
+                                Height="" Width="" 
+                                Classes="iconButton"
+                                Command="{Binding SettingsCommand}"
+                                HorizontalAlignment="Right"></Button>
+                        <StackPanel Grid.Row="1" Spacing="30"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left">
+                            <Label Content="Авторизация"
+                                   HorizontalAlignment="Center"
+                                   FontSize="35"
+                                   FontWeight="Bold"
+                                   Margin="0 0 0 20"
+                                   Foreground="Black"></Label>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Left">
+                                <TextBox Watermark="{Binding LoginWatermark}"
+                                         Width="350"
+                                         Height="60"
+                                         Text="{Binding Login}"
+                                         HorizontalAlignment="Center"
+                                         Classes="mainTextBox"
+                                         Margin="-1 0 0 0">
+                                </TextBox>
+                            </StackPanel>
+                            <Grid>
+                                <TextBox Watermark="{Binding PasswordWatermark}"
+                                         Width="350"
+                                         Height="60"
+                                         Classes="mainTextBox"
+                                         Text="{Binding Password}"
+                                         HorizontalAlignment="Center"
+                                         PasswordChar="*"
+                                         RevealPassword="{Binding RevealPassword}">
+                                
+                                </TextBox>
+                                <Button Classes="iconButton"
+                                        Content="{Binding PasswordButtonIcon}"
+                                        Command="{Binding ShowPasswordCommand}"
+                                        HorizontalAlignment="Right"
+                                        Margin="5 11 2 11"
+                                        Padding="5 11 12 11"
+                                        Background="White"
+                                        CornerRadius="10"></Button>
+                            </Grid>
+                            <Label Foreground="Red"
+                                   IsVisible="{Binding ErrorVisible}"
+                                   HorizontalAlignment="Center"
+                                   FontSize="18"></Label>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Spacing="10"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Left">
+                            <Button Classes="mainButton"
+                                    Content="{Binding AuthorizationText}"
+                                    Height="60" Width="350"
+                                    HorizontalAlignment="Center"
+                                    Command="{Binding AuthorisationCommand}">
+                            </Button>
+                            <Button Classes="exitButton"
+                                    Content="{Binding ExitText}"
+                                    Height="60" Width="350"
+                                    HorizontalAlignment="Center"
+                                    Click="ButtonExit_OnClick">
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+            </StackPanel>
+            </Grid>
+        </Panel>
+    </Border>
+
+</Window>

@@ -1,0 +1,127 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <TextBox Text=""
+                    Height="50" Width="400" 
+                    Watermark="Введите текст"
+                    Classes="dataTextBox"></TextBox>
+        </Border>
+    </Design.PreviewWith>
+    
+    <Style Selector="TextBox.mainTextBox">
+        <Setter Property="Background" Value="White"> </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"> </Setter>
+        <Setter Property="BorderThickness" Value="3"> </Setter>
+        <Setter Property="CornerRadius" Value="10"> </Setter>
+        <Setter Property="FontSize" Value="25"> </Setter>
+        <Setter Property="FontWeight" Value="Normal"> </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"> </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource primaryTextBoxColor}"> </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Foreground" Duration="0:0:0.5" Easing="QuarticEaseOut"></BrushTransition>
+            </Transitions>
+        </Setter>
+        <Style Selector="^ /template/ TextBlock#PART_Watermark">
+            <Setter Property="FontSize" Value="25"> </Setter>
+            <Setter Property="FontWeight" Value="Normal"> </Setter>
+            <Setter Property="Foreground" Value="{DynamicResource primaryTextBoxColor}"> </Setter>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.5" Easing="QuarticEaseOut"></BrushTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^ /template/ TextBlock#PART_Text">
+            <Setter Property="FontSize" Value="25"> </Setter>
+            <Setter Property="FontWeight" Value="Normal"> </Setter>
+            <Setter Property="Foreground" Value="Black"> </Setter>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.5" Easing="QuarticEaseOut"></BrushTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^ /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.5" Easing="QuarticEaseOut"></BrushTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^:pointerover">
+            <Style Selector="^ /template/ Border#PART_BorderElement">
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="BorderBrush" Value="Black"></Setter>
+            </Style>
+        </Style>
+        <Style Selector="^:focus">
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Style Selector="^ /template/ Border#PART_BorderElement">
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="BorderBrush" Value="Black"></Setter>
+                <Setter Property="BorderThickness" Value="3"></Setter>
+            </Style>
+        </Style>
+    </Style>
+    
+    <Style Selector="TextBox.dataTextBox">
+        <Setter Property="Background" Value="White"> </Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"> </Setter>
+        <Setter Property="BorderThickness" Value="3"> </Setter>
+        <Setter Property="CornerRadius" Value="5"> </Setter>
+        <Setter Property="FontSize" Value="18"> </Setter>
+        <Setter Property="FontWeight" Value="Normal"> </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"> </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource primaryTextBoxColor}"> </Setter>
+        <Setter Property="Transitions">
+            <Transitions>
+                <BrushTransition Property="Foreground" Duration="0:0:0.5" Easing="QuarticEaseOut"></BrushTransition>
+            </Transitions>
+        </Setter>
+        <Style Selector="^ /template/ TextBlock#PART_Watermark">
+            <Setter Property="FontSize" Value="18"> </Setter>
+            <Setter Property="FontWeight" Value="Normal"> </Setter>
+            <Setter Property="Foreground" Value="{DynamicResource primaryTextBoxColor}"> </Setter>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.5" Easing="QuarticEaseOut"></BrushTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^ /template/ TextBlock#PART_Text">
+            <Setter Property="FontSize" Value="18"> </Setter>
+            <Setter Property="FontWeight" Value="Normal"> </Setter>
+            <Setter Property="Foreground" Value="Black"> </Setter>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Foreground" Duration="0:0:0.5" Easing="QuarticEaseOut"></BrushTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^ /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="BorderBrush" Duration="0:0:0.5" Easing="QuarticEaseOut"></BrushTransition>
+                </Transitions>
+            </Setter>
+        </Style>
+        <Style Selector="^:pointerover">
+            <Style Selector="^ /template/ Border#PART_BorderElement">
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="BorderBrush" Value="Black"></Setter>
+            </Style>
+        </Style>
+        <Style Selector="^:focus">
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Style Selector="^ /template/ Border#PART_BorderElement">
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="BorderBrush" Value="Black"></Setter>
+                <Setter Property="BorderThickness" Value="3"></Setter>
+            </Style>
+        </Style>
+    </Style>
+</Styles>

@@ -1,0 +1,137 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:VKR.ViewModels"
+        mc:Ignorable="d" 
+        Width="1140" Height="720"
+        x:Class="VKR.Views.AdminMainWindow"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        SystemDecorations="None"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        WindowStartupLocation="CenterScreen"
+        x:DataType="viewModels:AdminMainViewModel"
+        Title="Рабочее место администратора">
+    
+    <Design.DataContext>
+        <viewModels:AdminMainViewModel/>
+    </Design.DataContext>
+    
+    <Border CornerRadius="30" Background="White">
+                <Panel>
+                    <Grid RowDefinitions="30 *">
+                        <Panel Grid.Row="0" Background="Transparent" 
+                               PointerMoved="InputElement_OnPointerMoved" 
+                               PointerPressed="InputElement_OnPointerPressed" 
+                               PointerReleased="InputElement_OnPointerReleased"/>
+                        <Panel Grid.Row="1" Background="Transparent"/>
+                    </Grid>
+                    <Grid ColumnDefinitions="300 *">
+                        <Border Grid.Column="0" 
+                            Background="{DynamicResource navigationBarColor}" 
+                            Margin="20"
+                            CornerRadius="30">
+                            <Grid RowDefinitions="Auto * Auto">
+                                <StackPanel Grid.Row="0" Spacing="15">
+                                    <Border Background="Gray"
+                                            Width="150"
+                                            Height="150"
+                                            ClipToBounds="True"
+                                            CornerRadius="200"
+                                            Margin="0 20 0 0">
+                                        <Image Source="{Binding ImageUser}"
+                                               Stretch="UniformToFill"/>
+                                    </Border>
+                                    <TextBlock FontSize="18"
+                                        HorizontalAlignment="Center" 
+                                        Foreground="Black"
+                                        TextWrapping="Wrap"
+                                        TextAlignment="Center"
+                                        Text="{Binding Fio}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Margin="0 30 0 0">
+                                    <Button Classes="navigationBarButton"
+                                            x:Name="Role"
+                                            Click="Role_OnClick"
+                                            Command="{Binding GoToRolePageCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Classes="icon" 
+                                                   VerticalAlignment="Center"
+                                                   Content="{Binding RoleNavButtonIcon}"/>
+                                            <Label Classes="textNavigationButton" 
+                                                   VerticalAlignment="Center" 
+                                                   Content="{Binding RoleNavButton}"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Classes="navigationBarButton"
+                                            x:Name="Status"
+                                            Click="Status_OnClick"
+                                            Command="{Binding GoToStatusPageCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Classes="icon" 
+                                                   VerticalAlignment="Center"
+                                                   Content="{Binding StatusNavButtonIcon}"/>
+                                            <Label Classes="textNavigationButton" 
+                                                   VerticalAlignment="Center" 
+                                                   Content="{Binding StatusNavButton}"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Classes="navigationBarButton"
+                                            x:Name="Categories"
+                                            Click="Categories_OnClick"
+                                            Command="{Binding GoToCategoriesPageCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Classes="icon"
+                                                   Content="{Binding CategoryNavButtonIcon}"/>
+                                            <Label Classes="textNavigationButton"
+                                                   Content="{Binding CategoryNavButton}"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Classes="navigationBarButton"
+                                            x:Name="Users"
+                                            Click="Users_OnClick"
+                                            Command="{Binding GoToUsersPageCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Classes="icon"
+                                                   Content="{Binding UserButtonIcon}"/>
+                                            <Label Classes="textNavigationButton"
+                                                   Content="{Binding UserButton}"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Classes="navigationBarButton"
+                                            x:Name="AddUser"
+                                            Click="AddUser_OnClick"
+                                            Command="{Binding GoToAddUserPageCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Classes="icon"
+                                                   Content="{Binding AddUserButtonIcon}"/>
+                                            <Label Classes="textNavigationButton" 
+                                                   Content="{Binding AddUserButton}"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                                <Button Grid.Row="2"
+                                        Classes="navigationBarButton"
+                                        Margin="0 0 0 20"
+                                        Click="ButtonExit_OnClick">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Classes="icon" 
+                                               VerticalAlignment="Center"
+                                               Content="&#xE42A;"/>
+                                        <Label Classes="textNavigationButton" 
+                                               VerticalAlignment="Center" 
+                                               Content="Выйти"/>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Column="1" Margin="0 20 20 20"
+                                CornerRadius="30">
+                            <ContentControl Content="{Binding CurrentPage}"/>
+                        </Border>
+                    </Grid>
+                </Panel>
+        </Border>
+</Window>

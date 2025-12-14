@@ -1,0 +1,50 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VKR.Views.SellerPages.ClientAddPageView"
+             xmlns:viewModels="clr-namespace:VKR.ViewModels.SellerPages"
+             x:DataType="viewModels:ClientAddPageViewModel">
+    <Design.DataContext>
+        <viewModels:ClientAddPageViewModel/>
+    </Design.DataContext>
+    <Border Width="" Height="" Background="{DynamicResource navigationBarColor}" CornerRadius="30">
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Label Content="ФИО"
+                   FontSize="26"
+                   FontWeight="DemiBold"
+                   Foreground="Black">
+            </Label>
+            <TextBox Classes="mainTextBox"
+                     Text="{Binding Fio}"
+                     Watermark="Иванов Иван Иванович"
+                     x:Name="FIO"
+                     MaxLength="200"
+                     TextChanged="TextBox_OnTextChanged"
+                     Width="400"
+                     Margin="0 0 0 30">
+            </TextBox>
+            <Label Content="Номер телефона"
+                   FontSize="26"
+                   FontWeight="DemiBold"
+                   Foreground="Black">
+            </Label>
+            <TextBox Classes="mainTextBox"
+                     Text="{Binding PhoneNumber}"
+                     Watermark="+7(999)999-99-99"
+                     x:Name="PhoneNumber"
+                     MaxLength="20"
+                     PointerPressed="PhoneBox_PointerPressed"
+                     Width="400"
+                     Margin="0 0 0 60"/>
+            <Button Content="Добавить клиента"
+                    Classes="mainButton"
+                    HorizontalAlignment="Center"
+                    Width="300"
+                    IsEnabled="{Binding ButtonIsertEnable}"
+                    Command="{Binding InsertUserCommand}"/>
+        </StackPanel>
+    </Border>
+</UserControl>

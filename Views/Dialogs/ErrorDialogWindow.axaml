@@ -1,0 +1,46 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="VKR.Views.Dialogs.ErrorDialogWindow"
+        xmlns:viewModels="clr-namespace:VKR.ViewModels"
+        Width="450" Height="250"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        SystemDecorations="None"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        WindowStartupLocation="CenterScreen"
+        x:DataType="viewModels:OkDialogViewModel">
+        <Border Background="White"
+                CornerRadius="20">
+                <Panel><Grid RowDefinitions="20 *">
+                                <Panel Grid.Row="0" Background="Transparent" PointerMoved="InputElement_OnPointerMoved" PointerPressed="InputElement_OnPointerPressed" PointerReleased="InputElement_OnPointerReleased"></Panel>
+                                <Panel Grid.Row="1" Background="Transparent"></Panel>
+                        </Grid>
+                <StackPanel Margin="20" Spacing="10">
+                        <Label Content="{Binding Title}"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="Black"></Label>
+                        <StackPanel Orientation="Horizontal">
+                                <Label Classes="icon" Content="" FontSize="110" Foreground="{DynamicResource errorColor}"
+                                       FontFamily="{DynamicResource PhosphorThin}"></Label>
+                                <TextBlock Text="{Binding Message}"
+                                           VerticalAlignment="Center"
+                                           Padding="10"
+                                           TextWrapping="Wrap"
+                                           FontSize="16"
+                                           Width="270"
+                                           Foreground="Black"></TextBlock>
+                        </StackPanel>
+                        <Button Classes="mainButton"
+                                Content="{Binding OkText}"
+                                Click="Button_OnClick"
+                                FontSize="18"
+                                BorderThickness="2"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Width="100"></Button>
+                </StackPanel>
+                </Panel>
+        </Border>
+</Window>

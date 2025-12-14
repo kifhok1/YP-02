@@ -1,0 +1,159 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:adminPages="clr-namespace:VKR.ViewModels.AdminPages"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:viewModels="clr-namespace:VKR.ViewModels.AdminPages"
+             x:Class="VKR.Views.AdminPages.OrderStatusPageView"
+             x:DataType="viewModels:OrderStatusPageViewModel">
+    <Design.DataContext>
+        <adminPages:OrderStatusPageViewModel/>
+    </Design.DataContext>
+    <Border Width="" Height="" Background="{DynamicResource navigationBarColor}" CornerRadius="30">
+    <Grid>
+        <StackPanel Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <DataGrid ItemsSource="{Binding SimpleData}"
+                      AutoGenerateColumns="False"
+                      CanUserSortColumns="False"
+                      CanUserResizeColumns="True"
+                      Height="450"
+                      Width="700"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Foreground="Black"
+                      Background="White"
+                      BorderThickness="2 2 2 2"
+                      IsReadOnly="True"
+                      SelectedItem="{Binding SelectedSimpleDataType}"
+                      BorderBrush="{DynamicResource primaryTextBoxColor}"
+                      ZIndex="2"
+                      x:Name="DataGrid"
+                      DoubleTapped="InputElement_OnDoubleTapped"><DataGrid.Styles>
+                            <Style Selector="DataGridColumnHeader">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="BorderThickness" Value="2 1 2 2"></Setter>
+                                <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"></Setter>
+                            </Style>
+                            <Style Selector="DataGridCell">
+                                <Setter Property="BorderThickness" Value="1 1 1 1"></Setter>
+                                <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"></Setter>
+                            </Style>
+                        </DataGrid.Styles>
+                        
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название статуса заказа" Binding="{Binding Name}" Width="*" ></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+            <Button Content="Добавить статус заказа" 
+                    HorizontalAlignment="Stretch" 
+                    HorizontalContentAlignment="Center"
+                    Classes="mainButton"
+                    Command="{Binding ShowAddCategoryCommand}"></Button>
+        </StackPanel>   
+        <Border Grid.Column="0"
+               Grid.Row="0"
+               Background="#D0000000"
+               x:Name="ElementAddStatus"
+               CornerRadius="30"
+               IsVisible="{Binding IsVisibleAddPanel}">
+            <Border Width="600"
+                    Height="280"
+                    CornerRadius="20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="White">
+                <StackPanel HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                    <Button Classes="iconButton"
+                            FontFamily="{DynamicResource PhosphorBold}"
+                            Foreground="{DynamicResource exitButtonColor}"
+                            FontSize="40"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Content="&#xE4F6;"
+                            Margin="0 10 10 0"
+                            Click="Button_OnClick"/>
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                        <Label Content="Новый статус"
+                               FontSize="26"
+                               FontWeight="DemiBold"
+                               Foreground="Black">
+                            </Label>
+                            <TextBox Classes="mainTextBox"
+                                     Text="{Binding NameStatusAdd}"
+                                     Watermark="Название статуса"
+                                     x:Name="NameStatus"
+                                     MaxLength="40"
+                                     TextChanged="TextBox_OnTextChanged"
+                                     Width="400"
+                                     Margin="0 0 0 40">
+                            </TextBox>
+                        <StackPanel Orientation="Horizontal" >
+                            <Button Content="Добавить статус"
+                                    Classes="mainButton"
+                                    Command="{Binding StatusAddCommand}"
+                                    HorizontalAlignment="Stretch"
+                                    Width="400"/>
+                        </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                 </Border>
+            </Border>
+            <Border Grid.Column="0"
+               Grid.Row="0"
+               Background="#D0000000"
+               x:Name="ElementUpdateStatus"
+               CornerRadius="30"
+               IsVisible="{Binding IsVisibleUpdatePanel}">
+            <Border Width="600"
+                    Height="280"
+                    CornerRadius="20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="White">
+                <StackPanel HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                    <Button Classes="iconButton"
+                            FontFamily="{DynamicResource PhosphorBold}"
+                            Foreground="{DynamicResource exitButtonColor}"
+                            FontSize="40"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Content="&#xE4F6;"
+                            Margin="0 10 10 0"
+                            Click="Button_OnClick"/>
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                        <Label Content="Изменение статуса"
+                               FontSize="26"
+                               FontWeight="DemiBold"
+                               Foreground="Black">
+                            </Label>
+                            <TextBox Classes="mainTextBox"
+                                     Text="{Binding NameStatusUpdate}"
+                                     Watermark="Название статуса"
+                                     x:Name="NameStausUpdate"
+                                     MaxLength="40"
+                                     TextChanged="TextBoxUpdate_OnTextChanged"
+                                     Width="400"
+                                     Margin="0 0 0 40">
+                            </TextBox>
+                        <StackPanel Orientation="Horizontal" >
+                            <Button Content="Изменить статус"
+                                    Classes="mainButton"
+                                    Command="{Binding StatusUpdateCommand}"
+                                    Click="Button_OnClick"
+                                    HorizontalAlignment="Stretch"
+                                    Width="400"/>
+                        </StackPanel>
+                </StackPanel>
+                    </StackPanel>
+                 </Border>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

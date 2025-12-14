@@ -1,0 +1,34 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="40 50 40 200">
+            <Border Padding="0 0 0 200">
+                <ComboBox Classes="dataComboBox"
+                          Height="50" Width="200"
+                          PlaceholderText="Text Items">
+                    <ComboBoxItem>Text Item 1</ComboBoxItem>
+                    <ComboBoxItem>Text Item 2</ComboBoxItem>
+                    <ComboBoxItem>Text Item 3</ComboBoxItem>
+                    <ComboBoxItem>Text Item 4</ComboBoxItem>
+                    <ComboBoxItem>Text Item 5</ComboBoxItem>
+                    <ComboBoxItem>Text Item 6</ComboBoxItem>
+                    <ComboBoxItem>Text Item 7</ComboBoxItem>
+                    <ComboBoxItem>Text Item 8</ComboBoxItem>
+                    <ComboBoxItem>Text Item 9</ComboBoxItem>
+                </ComboBox>
+            </Border>
+        </Border>
+    </Design.PreviewWith>
+    <Style Selector="ComboBox.dataComboBox">
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource primaryTextBoxColor}"/>
+        <Setter Property="PlaceholderForeground" Value="{DynamicResource primaryTextBoxColor}"/>
+        <Setter Property="MaxDropDownHeight" Value="200"/>
+    </Style>
+</Styles>

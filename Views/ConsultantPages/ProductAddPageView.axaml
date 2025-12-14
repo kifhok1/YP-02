@@ -1,0 +1,139 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="650"
+             x:Class="VKR.Views.ConsultantPages.ProductAddPageView"
+             xmlns:viewModels="clr-namespace:VKR.ViewModels.ConsultantPages"
+             x:DataType="viewModels:ProductAddPageViewModel">
+    <Design.DataContext>
+        <viewModels:ProductAddPageViewModel/>
+    </Design.DataContext>
+    <Border Width="" Height="" Background="{DynamicResource navigationBarColor}" CornerRadius="30">
+        <StackPanel Margin="30"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Spacing="30">
+                <Grid ColumnDefinitions="Auto Auto Auto *"
+                      RowDefinitions="* * * *">
+                    <TextBox Grid.Row="1" Grid.Column="0" 
+                             Classes="mainTextBox"
+                             Watermark="Nikon Z7 III"
+                             Width="250"
+                             Height="50"
+                             MaxLength="200"
+                             x:Name="ProductName"
+                             TextChanged="ProductName_OnTextChanged"
+                             Margin="0 10 0 0"
+                             Text="{Binding Name}"></TextBox>
+                    <TextBox Grid.Row="1" Grid.Column="1"
+                             Classes="mainTextBox"
+                             Width="210"
+                             Watermark="59999"
+                             MaxLength="8"
+                             x:Name="Price"
+                             TextChanged="Price_OnTextChanged"
+                             Margin="20 10 0 0"
+                             Text="{Binding Price}"/>
+                    <TextBox Grid.Row="3" Grid.Column="0" 
+                             Classes="mainTextBox"
+                             Width="250"
+                             Height="50"
+                             Watermark="9"
+                             x:Name="CountInStoke"
+                             MaxLength="3"
+                             TextChanged="CountInStoke_OnTextChanged"
+                             Text="{Binding CountInStoke}"
+                             Margin="0 10 0 0"></TextBox>
+                    <TextBox Grid.Row="3" Grid.Column="1"
+                             Classes="mainTextBox"
+                             Width="210"
+                             Watermark="5"
+                             MaxLength="2"
+                             x:Name="Discount"
+                             TextChanged="Discount_OnTextChanged"
+                             Margin="20 10 0 0"
+                             Text="{Binding Discount}"/>
+                    <ComboBox Grid.Row="1"  Grid.Column="2" 
+                             Classes="dataComboBox"
+                             Width="200"
+                             Height="50"
+                             CornerRadius="10"
+                             Margin="20 10 0 0"
+                             ItemsSource="{Binding ListCategory}"
+                             SelectedItem="{Binding CategorySelected}"
+                             DisplayMemberBinding="{Binding Name}"/>
+                    <Label Grid.Column="0" Grid.Row="0" 
+                           Content="Название"
+                           Foreground="Black"
+                           FontWeight="Bold"
+                           FontSize="20"/>
+                    <Label Grid.Column="1" Grid.Row="0" 
+                           Content="Цена"
+                           Foreground="Black"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Margin="20 0 0 0"/>
+                    <Label Grid.Column="0" Grid.Row="2" 
+                           Content="Количество на складе"
+                           Foreground="Black"
+                           FontWeight="Bold"
+                           FontSize="20"
+                           Margin="0 20 0 0"/>
+                    <Label Grid.Column="1" Grid.Row="2" 
+                           Content="Скидка"
+                           Foreground="Black"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Margin="20 20 0 0"/>
+                    <Label Grid.Column="2" Grid.Row="0" 
+                           Content="Категория"
+                           Foreground="Black"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Margin="20 0 0 0"/>
+                </Grid>
+                <Grid ColumnDefinitions="* Auto"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Margin="0 10 0 0 ">
+                    <Rectangle Grid.Column="0"
+                               Stroke="{DynamicResource primaryTextBoxColor}"
+                               StrokeThickness="4"
+                               StrokeDashArray="5,1" 
+                               RadiusX="10"
+                               RadiusY="10"
+                               Height="350"
+                               Width="450"
+                               IsVisible="{Binding BorderVisible}"/>
+                    <Border Grid.Column="0" CornerRadius="10"
+                            IsVisible="{Binding ImageVisible}"
+                            Height="300"
+                            Width="450"
+                            ClipToBounds="True">
+                        <Image Source="{Binding Image}"
+                               Stretch="UniformToFill"/>
+                    </Border>
+                    <StackPanel Grid.Column="1" 
+                                Margin=" 20 0 0 0 "
+                                Spacing="165">
+                        <Button Classes="mainButton"
+                                Width="230"
+                                Height="110"
+                                Command="{Binding AddImageCommand}">
+                            <TextBlock TextWrapping="Wrap" Text="Добавить изображение" 
+                                     TextAlignment="Center"></TextBlock>
+                        </Button>
+                        <Button Classes="mainButton"
+                                Width="230"
+                                Height="75"
+                                IsEnabled="{Binding ButtonIsertEnable}"
+                                Command="{Binding InsertProductCommand}">
+                            <TextBlock TextWrapping="Wrap" Text="Добавить Товар" 
+                                       TextAlignment="Center"></TextBlock>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+    </Border>
+</UserControl>

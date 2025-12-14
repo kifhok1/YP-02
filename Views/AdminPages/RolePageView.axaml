@@ -1,0 +1,101 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="500"
+             x:Class="VKR.Views.AdminPages.RolePageView"
+             xmlns:viewModels="clr-namespace:VKR.ViewModels.AdminPages"
+             x:DataType="viewModels:RolePageViewModel">
+        <Border Width="" Height="" Background="{DynamicResource navigationBarColor}" CornerRadius="30">
+            <Grid ColumnDefinitions="*"
+                RowDefinitions="*">
+                <StackPanel Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <DataGrid ItemsSource="{Binding SimpleData}" 
+                        AutoGenerateColumns="False"
+                        CanUserSortColumns="False"
+                        CanUserResizeColumns="True"
+                        Height="450"
+                        Width="700"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="Black"
+                        Background="White"
+                        IsReadOnly="True"
+                        BorderThickness="2 2 2 2"
+                        SelectedItem="{Binding SelectedSimpleDataType}"
+                        DoubleTapped="InputElement_OnDoubleTapped"
+                        x:Name="DataGrid"
+                        BorderBrush="{DynamicResource primaryTextBoxColor}"
+                        ZIndex="2"><DataGrid.Styles>
+                            <Style Selector="DataGridColumnHeader">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="BorderThickness" Value="2 2 2 2"></Setter>
+                                <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"></Setter>
+                            </Style>
+                            <Style Selector="DataGridCell">
+                                <Setter Property="BorderThickness" Value="1 1 2 1"></Setter>
+                                <Setter Property="BorderBrush" Value="{DynamicResource primaryTextBoxColor}"></Setter>
+                            </Style>
+                        </DataGrid.Styles>
+                        
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Название роли" Binding="{Binding Name}" Width="*" ></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            <Border Grid.Column="0"
+               Grid.Row="0"
+               Background="#D0000000"
+               x:Name="ElementUpdateRole"
+               CornerRadius="30"
+               IsVisible="{Binding IsVisiblePanelUpdate}">
+            <Border Width="600"
+                    Height="280"
+                    CornerRadius="20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="White">
+                <StackPanel HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                    <Button Classes="iconButton"
+                            FontFamily="{DynamicResource PhosphorBold}"
+                            Foreground="{DynamicResource exitButtonColor}"
+                            FontSize="40"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Content="&#xE4F6;"
+                            Margin="0 10 10 0"
+                            Click="Button_OnClick"/>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                            <Label Content="Изменение роли"
+                                   FontSize="26"
+                                   FontWeight="DemiBold"
+                                   Foreground="Black">
+                                </Label>
+                                <TextBox Classes="mainTextBox"
+                                         Text="{Binding NameRole}"
+                                         Watermark="Название роли"
+                                         x:Name="NameRoleUpdate"
+                                         MaxLength="40"
+                                         TextChanged="TextBox_OnTextChanged"
+                                         Width="400"
+                                         Margin="0 0 0 40">
+                                </TextBox>
+                            <StackPanel Orientation="Horizontal" >
+                                <Button Content="Изменить роль"
+                                        Classes="mainButton"
+                                        Command="{Binding RoleUpdateCommand}"
+                                        Click="Button_OnClick"
+                                        HorizontalAlignment="Stretch"
+                                        Width="400"/>
+                            </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Border>
+        </Grid>
+        </Border>
+</UserControl>

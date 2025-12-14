@@ -1,0 +1,56 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModels="clr-namespace:VKR.ViewModels"
+        Width="450" Height="250"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        SystemDecorations="None"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        WindowStartupLocation="CenterScreen"
+        x:Class="VKR.Views.Dialogs.WarningYesOrNotDialogWindow"
+        x:DataType="viewModels:YesOrNotDialogViewModel">
+        <Border Background="White"
+                CornerRadius="20">
+                <Panel><Grid RowDefinitions="20 *">
+                                <Panel Grid.Row="0" Background="Transparent" PointerMoved="InputElement_OnPointerMoved" PointerPressed="InputElement_OnPointerPressed" PointerReleased="InputElement_OnPointerReleased"/>
+                                <Panel Grid.Row="1" Background="Transparent"/>
+                        </Grid>
+                        <StackPanel Margin="20" Spacing="10">
+                                <Label Content="{Binding Title}"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="Black"/>
+                                <StackPanel Orientation="Horizontal">
+                                        <Label Classes="icon" Content="&#xE4E4;" FontSize="110" Foreground="DarkOrange"
+                                               FontFamily="{DynamicResource PhosphorThin}"/>
+                                        <TextBlock Text="{Binding Message}"
+                                                   VerticalAlignment="Center"
+                                                   Padding="10"
+                                                   TextWrapping="Wrap"
+                                                   FontSize="16"
+                                                   Width="270"
+                                                   Foreground="Black"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Right">
+                                        <Button Classes="mainButton"
+                                                Content="{Binding YesText}"
+                                                Command="{Binding YESCommand}"
+                                                FontSize="18"
+                                                BorderThickness="2"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Bottom"
+                                                Width="100"/> 
+                                        <Button Classes="mainButton"
+                                                Content="{Binding NoText}"
+                                                Command="{Binding NOCommand}"
+                                                FontSize="18"
+                                                BorderThickness="2"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Bottom"
+                                                Width="100"/> 
+                                </StackPanel>
+                        </StackPanel>
+                </Panel>
+        </Border>
+</Window>
