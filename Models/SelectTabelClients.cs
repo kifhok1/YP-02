@@ -25,7 +25,9 @@ public class SelectTabelClients : ISelectTables<Client>
                     reader.GetInt32("ID"),
                     reader.GetString("FIO"),
                     reader.GetString("PhoneNumber"),
-                    reader.GetDouble("AmountOfNumber")));
+                    reader.GetDouble("AmountOfNumber"),
+                    reader.GetString("FIO_Hide"),
+                    reader.GetString("PhoneNumber_Hide")));
             }
             connection.Close();
             return clients;
@@ -75,10 +77,12 @@ public class SelectTabelClients : ISelectTables<Client>
                     if (reader.Read())
                     {
                         client = new Client(
-                                Convert.ToInt32(reader["ID_Clients"]),
-                                reader["Fio"].ToString(),
-                                reader["PhoneNumber"].ToString(), 
-                                Convert.ToDouble(reader["AmountOfNumber"]));
+                            reader.GetInt32("ID"),
+                            reader.GetString("FIO"),
+                            reader.GetString("PhoneNumber"),
+                            reader.GetDouble("AmountOfNumber"),
+                            reader.GetString("FIO_Hide"),
+                            reader.GetString("PhoneNumber_Hide"));
                     }
                 }
             }
