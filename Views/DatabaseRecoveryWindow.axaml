@@ -1,0 +1,90 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Width="500" 
+        Height="350"
+        x:Class="VKR.Views.DatabaseRecoveryWindow"
+        Title="Востановление базы данных"
+        xmlns:vm="using:VKR.ViewModels"
+        x:DataType="vm:DatabaseRecoveryViewModel"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        SystemDecorations="None"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="False"
+        WindowStartupLocation="CenterScreen">
+        <Design.DataContext>
+        <vm:DatabaseRecoveryViewModel/>
+        </Design.DataContext>
+        
+        <Border CornerRadius="30" Background="White">
+                <Panel>
+                        <Grid RowDefinitions="30 *">
+                                <Panel Grid.Row="0" Background="Transparent" PointerMoved="InputElement_OnPointerMoved" PointerPressed="InputElement_OnPointerPressed" PointerReleased="InputElement_OnPointerReleased"></Panel>
+                                <Panel Grid.Row="1" Background="Transparent"/>
+                        </Grid>
+                        <StackPanel Margin="5 10 5 10"
+                                    HorizontalAlignment="Stretch"
+                                    Spacing="5">
+                                <Border CornerRadius="5"
+                                        Height="30"
+                                        Background="{DynamicResource ButtonBackground}">
+                                        <StackPanel HorizontalAlignment="Center" 
+                                                            Orientation="Horizontal">
+                                                <Button Classes="navigationBarButton"
+                                                        Content="Востановление структуры БД"
+                                                        FontSize="12"
+                                                        FontWeight="Bold"
+                                                        Command="{Binding ShowStructureCommand}"/>
+                                                <Button  Classes="navigationBarButton"
+                                                         Content="Импорт данных в БД"
+                                                         FontSize="12"
+                                                         FontWeight="Bold"
+                                                         Command="{Binding ShowImportCommand}"/>
+                                                <Button  Classes="navigationBarButton"
+                                                         Content="Выход"
+                                                         FontSize="12"
+                                                         FontWeight="Bold"
+                                                         Click="CloseWindow"/>
+                                        </StackPanel>
+                                </Border>
+                                <Border CornerRadius="5"
+                                        Height="300"
+                                        IsVisible="{Binding IsVisibleStructure}">
+                                        <StackPanel HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center" Spacing="10">
+                                                <Label Content="База данных найдена хотите её пересоздать?"
+                                                       FontSize="18"
+                                                       FontWeight="Bold"/>
+                                                <Button Classes="mainButton"
+                                                        Background="Transparent"
+                                                        HorizontalAlignment="Center"
+                                                        FontSize="18"
+                                                        Content="Востановление базы данных"/>
+                                        </StackPanel>
+                                </Border>
+                                <Border CornerRadius="5"
+                                        IsVisible="{Binding IsVisibleImport}"
+                                        Height="300">
+                                        <StackPanel HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Spacing="10">
+                                                <Label Content="Выбор таблицы для импорта данных"
+                                                       FontSize="18"
+                                                       FontWeight="Bold"/>
+                                                <ComboBox Classes="dataComboBox"
+                                                          Width="200"
+                                                          HorizontalAlignment="Center"/>
+                                                <Button Classes="mainButton"
+                                                        Background="Transparent"
+                                                        HorizontalAlignment="Center"
+                                                        FontSize="18"
+                                                        Content="Импорт данных в таблицу"/>
+                                        </StackPanel>
+                                </Border>
+                        </StackPanel>
+                </Panel>
+       </Border>
+</Window>

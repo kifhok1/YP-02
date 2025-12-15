@@ -156,6 +156,37 @@ CREATE TABLE `workers` (
   KEY `rule` (`rule`),
   CONSTRAINT `workers_ibfk_1` FOREIGN KEY (`rule`) REFERENCES `rule` (`ID_Rule`)
 ) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `categoryproduct`
+--
+
+LOCK TABLES `categoryproduct` WRITE;
+/*!40000 ALTER TABLE `categoryproduct` DISABLE KEYS */;
+INSERT INTO `categoryproduct` VALUES (1,'Зеркальные фотоаппараты'),(2,'Беззеркальные фотоаппараты'),(3,'Объективы'),(4,'Вспышки и свет'),(5,'Штативы и стабилизация'),(6,'Карты памяти и хранилища'),(7,'Аккумуляторы и питание'),(8,'Фотосумки и аксессуары');
+/*!40000 ALTER TABLE `categoryproduct` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `orderstatus`
+--
+
+LOCK TABLES `orderstatus` WRITE;
+/*!40000 ALTER TABLE `orderstatus` DISABLE KEYS */;
+INSERT INTO `orderstatus` VALUES (1,'Доставленно'),(2,'Отправлено'),(3,'Отменен');
+/*!40000 ALTER TABLE `orderstatus` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `rule`
+--
+
+LOCK TABLES `rule` WRITE;
+/*!40000 ALTER TABLE `rule` DISABLE KEYS */;
+INSERT INTO `rule` VALUES (1,'Администратор'),(2,'Продавецц'),(3,'Консультант');
+/*!40000 ALTER TABLE `rule` ENABLE KEYS */;
+UNLOCK TABLES;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
