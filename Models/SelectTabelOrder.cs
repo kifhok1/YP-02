@@ -24,6 +24,7 @@ public class SelectTabelOrder
                     id: reader.GetInt32("ID"),
                     clientId: reader.GetInt32("ClientID"),
                     client: reader.GetString("ClientName"),
+                    clientHide: reader.GetString("ClientNameHide"),
                     date: reader.GetDateTime("DateOrder"),
                     statusId: reader.GetInt32("StatusID"),
                     status: reader.GetString("StatusName"),

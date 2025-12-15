@@ -8,6 +8,7 @@ namespace VKR.Models;
 public class Order(int id,
     int clientId,
     string client,
+    string clientHide,
     DateTime date,
     int statusId,
     string status,
@@ -20,6 +21,7 @@ public class Order(int id,
     private int _id = id;
     private int _clientId = clientId;
     private string _clientView = client;
+    private string _clientViewHide = clientHide;
     private DateTime _date = date;
     private DateTime _deliveryDate = deliveryDate;
     private string _code = code;
@@ -50,6 +52,13 @@ public class Order(int id,
     {
         get { return _clientView; }
         set { _clientView = value; }
+    }
+
+   // Отображаемое имя клиента (например, ФИО)
+    public string ClientViewHide
+    {
+        get { return _clientViewHide; }
+        set { _clientViewHide = value; }
     }
 
     // Дата создания заказа в формате строки

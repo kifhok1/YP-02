@@ -93,6 +93,11 @@ public partial class PurchasesPageViewModel : ViewModelBase
     private string queryOrder = @"SELECT ID_Order AS 'ID',
                          ID_Client AS 'ClientID',
                          c.Fio AS 'ClientName',
+                         CONCAT(
+                                SUBSTRING_INDEX(Fio, ' ', 1), ' ',
+                                LEFT(SUBSTRING_INDEX(SUBSTRING_INDEX(Fio, ' ', 2), ' ', -1), 1), '. ',
+                                LEFT(SUBSTRING_INDEX(SUBSTRING_INDEX(Fio, ' ', 3), ' ', -1), 1), '.'
+                            ) AS 'ClientNameHide',
                          CostOrder,
                          DateOrder,
                          DeliveryDate,

@@ -77,7 +77,7 @@
                             </DataGrid.Styles>
                             
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Клиент" Binding="{Binding ClientView}" Width="*"/>
+                                <DataGridTextColumn Header="Клиент" Binding="{Binding ClientViewHide}" Width="*"/>
                                 <DataGridTextColumn Header="Дата покупки" Binding="{Binding Date}" Width="*"/>
                                 <DataGridTextColumn Header="Дата доставки" Binding="{Binding DeliveryDate}" Width="*"/>
                                 <DataGridTextColumn Header="Статус заказа" Binding="{Binding Status}" Width="*"/>

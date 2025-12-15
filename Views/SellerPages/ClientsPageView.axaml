@@ -53,8 +53,8 @@
                         </DataGrid.Styles>
                         
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Фио" Binding="{Binding Fio}" Width="*"/>
-                            <DataGridTextColumn Header="Номер телефона" Binding="{Binding PhoneNumber}" Width="*"/>
+                            <DataGridTextColumn Header="Фио" Binding="{Binding FioHide}" Width="*"/>
+                            <DataGridTextColumn Header="Номер телефона" Binding="{Binding PhoneNumberHide}" Width="*"/>
                             <DataGridTextColumn Header="Общаяя сумма купленых товаров" Binding="{Binding AmountOfNumber}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
