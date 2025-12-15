@@ -11,9 +11,35 @@ namespace VKR.ViewModels.SellerPages;
 public partial class ClientsPageViewModel : ViewModelBase
 {
     // Базовый SQL-запрос для выборки клиентов
-    private string _queryBase = "SELECT ID_Clients AS 'ID', Fio AS 'FIO', PhoneNumber, AmountOfNumber FROM clients";
+    private string _queryBase = @"SELECT ID_Clients AS 'ID',
+                                 Fio AS 'FIO',
+                                 PhoneNumber, 
+                                    CONCAT(
+                                        SUBSTRING_INDEX(Fio, ' ', 1), ' ',
+                                        LEFT(SUBSTRING_INDEX(SUBSTRING_INDEX(Fio, ' ', 2), ' ', -1), 1), '. ',
+                                        LEFT(SUBSTRING_INDEX(SUBSTRING_INDEX(Fio, ' ', 3), ' ', -1), 1), '.'
+                                    ) AS 'FIO_Hide',
+                                    CONCAT(
+                                        SUBSTRING(PhoneNumber, 1, 7),
+                                        'xxx-xx-xx'
+                                    ) AS 'PhoneNumber_Hide',
+                                 AmountOfNumber
+                                 FROM clients";
 
-    private string _query = "SELECT ID_Clients AS 'ID', Fio AS 'FIO', PhoneNumber, AmountOfNumber FROM clients;";
+    private string _query = @"SELECT ID_Clients AS 'ID',
+                                 Fio AS 'FIO',
+                                 PhoneNumber, 
+                                    CONCAT(
+                                        SUBSTRING_INDEX(Fio, ' ', 1), ' ',
+                                        LEFT(SUBSTRING_INDEX(SUBSTRING_INDEX(Fio, ' ', 2), ' ', -1), 1), '. ',
+                                        LEFT(SUBSTRING_INDEX(SUBSTRING_INDEX(Fio, ' ', 3), ' ', -1), 1), '.'
+                                    ) AS 'FIO_Hide',
+                                    CONCAT(
+                                        SUBSTRING(PhoneNumber, 1, 7),
+                                        'xxx-xx-xx'
+                                    ) AS 'PhoneNumber_Hide',
+                                 AmountOfNumber
+                                 FROM clients;";
 
     private Client _selectedClient;
     private string _fio;

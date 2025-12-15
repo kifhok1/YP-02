@@ -88,7 +88,20 @@ public partial class ClientAddPageViewModel : ViewModelBase
         {
             // Загрузка существующих клиентов для проверки уникальности номера телефона
             ObservableCollection<Client> table = SelectTabelClients.SelectTable(
-                "SELECT ID_Clients AS 'ID', Fio AS 'FIO', PhoneNumber, AmountOfNumber FROM clients;", 
+                @"SELECT ID_Clients AS 'ID',
+                                 Fio AS 'FIO',
+                                 PhoneNumber, 
+                                    CONCAT(
+                                        SUBSTRING_INDEX(Fio, ' ', 1), ' ',
+                                        LEFT(SUBSTRING_INDEX(SUBSTRING_INDEX(Fio, ' ', 2), ' ', -1), 1), '. ',
+                                        LEFT(SUBSTRING_INDEX(SUBSTRING_INDEX(Fio, ' ', 3), ' ', -1), 1), '.'
+                                    ) AS 'FIO_Hide',
+                                    CONCAT(
+                                        SUBSTRING(PhoneNumber, 1, 7),
+                                        'xxx-xx-xx'
+                                    ) AS 'PhoneNumber_Hide',
+                                 AmountOfNumber
+                                 FROM clients;", 
                 ConnectToDB.ConnectToDBString());
             
             // Проверка уникальности номера телефона
