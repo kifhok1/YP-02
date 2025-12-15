@@ -1,8 +1,11 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using Avalonia.Threading;
+using VKR.Models;
 using VKR.ViewModels;
 
 namespace VKR.Views;
@@ -41,7 +44,113 @@ public partial class SellerMainWindow : Window
 
     public SellerMainWindow()
     {
+        try
+        {
+            _inactivityTimeout = TimeSpan.FromSeconds(ReadXmlLockTimer.ReadConfigFile());
+        }
+        catch (Exception ex)
+        {
+            _inactivityTimeout = TimeSpan.FromSeconds(30);
+        }
         InitializeComponent();
+        InitializeInactivityTimer();
+    }
+    
+    private DispatcherTimer _inactivityTimer;
+    private DateTime _lastActivityTime;
+    private TimeSpan _inactivityTimeout;
+    private bool _isClosing = false;
+
+    private void InitializeInactivityTimer()
+    {
+        // Создаем таймер
+        _inactivityTimer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromSeconds(1)
+        };
+        
+        _inactivityTimer.Tick += OnInactivityTimerTick;
+        _lastActivityTime = DateTime.Now;
+        
+        // Подписываемся на события мыши и клавиатуры
+        this.PointerMoved += OnUserActivity;
+        this.PointerPressed += OnUserActivity;
+        this.KeyDown += OnUserActivity;
+        this.PointerReleased += OnUserActivity;
+        this.PointerWheelChanged += OnUserActivity;
+        
+        _inactivityTimer.Start();
+    }
+
+    private void OnUserActivity(object sender, EventArgs e)
+    {
+        // Обновляем время последней активности
+        _lastActivityTime = DateTime.Now;
+    }
+
+    private void OnInactivityTimerTick(object sender, EventArgs e)
+    {
+        var idleTime = DateTime.Now - _lastActivityTime;
+        
+        if (idleTime >= _inactivityTimeout)
+        {
+            // Останавливаем таймер перед выполнением действий
+            _inactivityTimer.Stop();
+            
+            // Выполняем действие при бездействии
+            HandleInactivity();
+        }
+    }
+
+    private async void HandleInactivity()
+    {
+        // Защита от повторного вызова
+        if (_isClosing) return;
+        _isClosing = true;
+        
+        try
+        {
+            // Создаем окно авторизации
+            var authorizationWindow = new MainWindow();
+            
+            // Создаем ViewModel для окна авторизации
+            var viewModel = new MainWindowViewModel(authorizationWindow);
+            authorizationWindow.DataContext = viewModel;
+            
+            // Отображаем окно авторизации
+            authorizationWindow.Show();
+            
+            // Закрываем текущее окно администратора
+            this.Close();
+        }
+        catch (Exception ex)
+        {
+            // Логируем ошибку
+            Console.WriteLine($"Error in HandleInactivity: {ex.Message}");
+            
+            // В случае ошибки все равно закрываем окно
+            this.Close();
+        }
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        // Отписываемся от событий
+        this.PointerMoved -= OnUserActivity;
+        this.PointerPressed -= OnUserActivity;
+        this.KeyDown -= OnUserActivity;
+        this.PointerReleased -= OnUserActivity;
+        this.PointerWheelChanged -= OnUserActivity;
+        
+        // Очистка ресурсов
+        if (_inactivityTimer != null)
+        {
+            _inactivityTimer.Tick -= OnInactivityTimerTick;
+            _inactivityTimer.Stop();
+            _inactivityTimer = null;
+        }
+        
+        base.OnClosed(e);
     }
 
     // Обработчик нажатия кнопки выхода из системы
