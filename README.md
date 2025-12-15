@@ -12,3 +12,5 @@
   - Администратор логин admin пароль admin
   - Продавец логин seller пароль admin
   - Консультант логин consultant пароль admin
+## Уточнение к заданию по блокировке системы
+**App.Config** или файл **Properties.Settings** <ins>отсутсвуют</ins> в Avalona UI, был использован XML файл
