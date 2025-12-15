@@ -16,8 +16,10 @@ public static class ReadXmlLockTimer
             // Извлечение элемента и его значения
             XmlElement timeoutElement = doc.DocumentElement;
             
+            //Поиск атрибута у корневого элемента
             int configTime = Convert.ToInt32(timeoutElement.GetAttribute("InactivityTimeoutSeconds"));
             
+            //Возвращаем время в секундах
             return configTime;
     }
 }
